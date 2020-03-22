@@ -2,13 +2,16 @@ package com.nhisyamj.springboottemplate.vo;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.Entity;
+import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
-@Entity(name = "emp")
-public class EmployeeVO extends Person {
+public class Employee {
+
+    @Id
+    private String id;
+
+    private String firstName;
     private String staffId;
     private String department;
     private String rank;

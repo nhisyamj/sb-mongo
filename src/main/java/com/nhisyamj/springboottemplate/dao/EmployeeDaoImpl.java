@@ -1,7 +1,7 @@
 package com.nhisyamj.springboottemplate.dao;
 
 import com.nhisyamj.springboottemplate.vm.EmployeeVM;
-import com.nhisyamj.springboottemplate.vo.EmployeeVO;
+import com.nhisyamj.springboottemplate.vo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
@@ -20,19 +20,19 @@ public class EmployeeDaoImpl {
     }
 
     public void addEmp(EmployeeVM vm) {
-        EmployeeVO newEmp = new EmployeeVO();
+        Employee newEmp = new Employee();
         newEmp.setFirstName(vm.getEmpName());
         newEmp.setRank(vm.getEmpRank());
         newEmp.setDepartment(vm.getDepartment());
         Assert.notNull(vm.getEmpId(),"EmpId is required");
-        EmployeeVO existingStaff = dao.findByStaffId(vm.getEmpId());
+        Employee existingStaff = dao.findByStaffId(vm.getEmpId());
         Assert.isNull(existingStaff,"empId already exists");
         newEmp.setStaffId(vm.getEmpId());
         dao.save(newEmp);
     }
 
     public void updateEmp(String empId, EmployeeVM vm) {
-        EmployeeVO existingEmp = dao.findByStaffId(empId);
+        Employee existingEmp = dao.findByStaffId(empId);
         Assert.notNull(existingEmp.getStaffId(),"EmpId not found");
         existingEmp.setFirstName(vm.getEmpName());
         existingEmp.setRank(vm.getEmpRank());
@@ -41,7 +41,7 @@ public class EmployeeDaoImpl {
     }
 
     public EmployeeVM getEmpByEmpId(String EmpId) {
-        EmployeeVO vo = dao.findByStaffId(EmpId);
+        Employee vo = dao.findByStaffId(EmpId);
         EmployeeVM vm = new EmployeeVM();
         vm.setDepartment(vo.getDepartment());
         vm.setEmpName(vo.getFirstName());
@@ -52,14 +52,14 @@ public class EmployeeDaoImpl {
     }
 
     public List<EmployeeVM> getEmpList() {
-        Iterable<EmployeeVO> employeeVOList = dao.findAll();
+        Iterable<Employee> employeeVOList = dao.findAll();
         List<EmployeeVM> employeeVMList = new ArrayList<>();
-        for (EmployeeVO employeeVO : employeeVOList) {
+        for (Employee employee : employeeVOList) {
             EmployeeVM employeeVM = new EmployeeVM();
-            employeeVM.setEmpRank(employeeVO.getRank());
-            employeeVM.setEmpId(employeeVO.getStaffId());
-            employeeVM.setEmpName(employeeVO.getFirstName());
-            employeeVM.setDepartment(employeeVO.getDepartment());
+            employeeVM.setEmpRank(employee.getRank());
+            employeeVM.setEmpId(employee.getStaffId());
+            employeeVM.setEmpName(employee.getFirstName());
+            employeeVM.setDepartment(employee.getDepartment());
             employeeVMList.add(employeeVM);
         }
 
@@ -67,7 +67,7 @@ public class EmployeeDaoImpl {
     }
 
     public void delEmpbyEmpId(String empId) {
-        EmployeeVO vo = dao.findByStaffId(empId);
+        Employee vo = dao.findByStaffId(empId);
         Assert.notNull(vo,"EmpId not found");
         dao.delete(vo);
     }

@@ -2,7 +2,7 @@ package com.nhisyamj.springboottemplate.service;
 
 import com.nhisyamj.springboottemplate.dao.EmployeeDaoImpl;
 import com.nhisyamj.springboottemplate.vm.EmployeeVM;
-import com.nhisyamj.springboottemplate.vo.EmployeeVO;
+import com.nhisyamj.springboottemplate.vo.Employee;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,15 +63,14 @@ public class EmployeeServiceTest {
 
     @Test
     public void getEmpListSuccessTest() {
-        List<EmployeeVO> list = new ArrayList<>();
+        List<Employee> list = new ArrayList<>();
         list.add(createEmployeeVO());
         List<EmployeeVM> employeeVMList = new ArrayList<>();
-        for (EmployeeVO employeeVO : list) {
+        for (Employee employee : list) {
             EmployeeVM vm = new EmployeeVM();
-            vm.setDepartment(employeeVO.getDepartment());
-            vm.setEmpRank(employeeVO.getRank());
-            vm.setEmpName(employeeVO.getFirstName());
-            vm.setEmpId(employeeVO.getStaffId());
+            vm.setDepartment(employee.getDepartment());
+            vm.setEmpRank(employee.getRank());
+            vm.setEmpId(employee.getStaffId());
             employeeVMList.add(vm);
         }
         Mockito.when(empDao.getEmpList()).thenReturn(employeeVMList);
@@ -89,13 +88,10 @@ public class EmployeeServiceTest {
         return vm;
     }
 
-    public EmployeeVO createEmployeeVO() {
-        EmployeeVO vo = new EmployeeVO();
+    public Employee createEmployeeVO() {
+        Employee vo = new Employee();
         vo.setFirstName("Ahmad");
-        vo.setLastName("Albab");
         vo.setStaffId("1234");
-        vo.setAge(22);
-        vo.setGender("Male");
         vo.setDepartment("RND");
 
         return vo;

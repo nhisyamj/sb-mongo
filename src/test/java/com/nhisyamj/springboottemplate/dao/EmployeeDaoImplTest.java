@@ -1,7 +1,7 @@
 package com.nhisyamj.springboottemplate.dao;
 
 import com.nhisyamj.springboottemplate.vm.EmployeeVM;
-import com.nhisyamj.springboottemplate.vo.EmployeeVO;
+import com.nhisyamj.springboottemplate.vo.Employee;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,7 +58,7 @@ public class EmployeeDaoImplTest {
 
     @Test
     public void getEmpListSuccessTest() {
-        List<EmployeeVO> list = new ArrayList<>();
+        List<Employee> list = new ArrayList<>();
         list.add(createEmployeeVO());
 
         Mockito.when(empDao.findAll()).thenReturn(list);
@@ -77,13 +77,10 @@ public class EmployeeDaoImplTest {
         return vm;
     }
 
-    public EmployeeVO createEmployeeVO() {
-        EmployeeVO vo = new EmployeeVO();
+    public Employee createEmployeeVO() {
+        Employee vo = new Employee();
         vo.setFirstName("Ahmad");
-        vo.setLastName("Albab");
         vo.setStaffId("1234");
-        vo.setAge(22);
-        vo.setGender("Male");
         vo.setDepartment("RND");
 
         return vo;
