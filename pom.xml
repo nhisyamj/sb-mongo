@@ -18,7 +18,7 @@
 		<java.version>11</java.version>
 		<mysql.connector.version>5.1.48</mysql.connector.version>
 		<lombok.version>1.18.12</lombok.version>
-		<springfox.swagger.version>2.9.2</springfox.swagger.version>
+		<springfox.swagger.version>2.10.0</springfox.swagger.version>
 		<jacoco.version>0.8.5</jacoco.version>
 		<sonar.version>3.7.0.1746</sonar.version>
 	</properties>
